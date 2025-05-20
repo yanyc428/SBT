@@ -234,6 +234,7 @@
       <p>
         To address overthinking in Large Reasoning Models (LRMs), we first analyze reasoning trajectories to identify inefficiency patterns and propose two metrics: Reasoning Efficiency Ratio (measuring early correctness) and Overthinking Marker Ratio (detecting redundant linguistic patterns).     Based on these, we design Self-Braking Tuning (SBT), which includes two data construction strategies: SBT-E truncates reasoning at fixed solution-level ratios to preserve essential steps, while SBT-D dynamically halts reasoning when overthinking scores exceed thresholds.     During training, redundant segments are masked to prevent reinforcement, and natural language "braking prompts" (e.g., "I’ve verified my answer, time to end thinking") teach models to autonomously terminate reasoning.     This framework significantly reduces token consumption while maintaining accuracy, enabling models to self-regulate reasoning length without external constraints.
       </p>
+      <div style="margin-top: 3rem;"></div>
       <img src="static/images/overview.png" alt="Illustration of SBT method" style="width: 100%; max-height: 600px; object-fit: cover; border-radius: 10px; margin-bottom: 1.5rem;">
       <p>
         Overview of Self-Braking Tuning. Left: Data construction process with overthinking identification and self braking truncation strategies. Right: An example of automatic reasoning termination in a trained Self-Braking LLM.
