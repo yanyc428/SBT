@@ -66,15 +66,6 @@
             More Research
           </a>
           <div class="navbar-dropdown">
-            <a class="navbar-item" href="https://ZJU-REAL.github.io/CoT-Bridge">
-              CoT-Bridge
-            </a>
-            <a class="navbar-item" href="https://zju-real.github.io/InftyThink/">
-            InftyThink
-            </a>
-            <a class="navbar-item" href="https://zju-real.github.io/ViewSpatial-Page/">
-            ViewSpatial-Bench
-            </a>
           </div>
         </div>
       </div>
@@ -461,6 +452,55 @@
 <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
 
     <!-- End of Statcounter Code -->
+  <script>
+    window.HELP_IMPROVE_VIDEOJS = false;
 
+    async function loadNavItems() {
+      try {
+        const response = await fetch('https://zju-real.github.io/paper-meta-info/meta.csv');
+        const csvText = await response.text();
+
+        const rows = csvText.split('\n')
+          .map(row => row.trim())
+          .filter(row => row) 
+          .map(row => {
+            const [name, url] = row.split(',').map(cell => cell.trim());
+            return { name, url };
+          });
+
+        return rows;
+      } catch (error) {
+        console.error('Error loading navigation items:', error);
+        return [];
+      }
+    }
+
+    $(document).ready(async function () {
+      const navItems = await loadNavItems();
+      const navDropdown = $('.navbar-dropdown');
+
+      navDropdown.empty();
+
+      navItems.forEach(item => {
+        const navItem = $('<a></a>')
+          .addClass('navbar-item')
+          .attr('href', item.url)
+          .text(item.name);
+        navDropdown.append(navItem);
+      });
+
+      var options = {
+        slidesToScroll: 1,
+        slidesToShow: 1,
+        loop: true,
+        infinite: true,
+        autoplay: true,
+        autoplaySpeed: 5000,
+      }
+
+      var carousels = bulmaCarousel.attach('.carousel', options);
+      bulmaSlider.attach();
+    });
+  </script>
   </body>
   </html>
